@@ -66,6 +66,14 @@ describe('standard merkle tree', () => {
     assert.deepEqual(t2, t);
   });
 
+  it('serialize and deserialize', () => {
+    const { t } = characters('abcdef');
+    const data = t.serialize();
+    const t2 = StandardMerkleTree.deserialize(data);
+    t2.validate();
+    assert.deepEqual(t2, t);
+  });
+
   it('reject out of bounds value index', () => {
     const { t } = characters('a');
     assert.throws(
